@@ -92,4 +92,49 @@ str = "hello world"
 
 # str13 = 11111111111111111123.123
 # print("%G" % str13)
-print("The percentage is %d%%" % 10)
+# print("The percentage is %d%%" % 10)
+
+# tmp = "{qytang}，{0} and {cisco}"                   #定义格式
+# str14 = tmp.format("A", qytang=1, cisco=3)     #字符串格式化
+# print(str14)
+
+# str15 = '{0:5}, {1:5} and {2:5}'.format("1", "A", "3")
+# print(str15)
+
+# tmp1 = "{}，{} and {}"                   #定义格式
+# str16 = tmp1.format("1", "A", "3")     #字符串格式化
+# print(str16)
+
+# str_format = '{local1},{local2},{local3}'
+# str17 = str_format.format(**{"local1":"qytang","local2":"test","local3":"cisco"})
+# print(str17)
+#
+# str_format1 = '{local1:10},{local2:10},{local3:10}'
+# str18 = str_format1.format(**{"local1":"qytang","local2":"test","local3":"cisco"})
+# print(str18)
+
+# str_format2 = '{local1:>10},{local2:^10},{local3:<10}'
+# str19 = str_format2.format(**{"local1":"qytang","local2":"test","local3":"cisco"})
+# print(str19)
+#
+# import sys
+# str22 = sys.platform
+# print(str22)
+# mydict= dict([("kind", "laptop")])
+# str20 = "{0.platform:>10}={1[kind]:<10}".format(sys, mydict)
+# print(str20)
+#
+# kind = "kind"
+# my_dict = {"kind":"laptop"}
+# print(my_dict["kind"])
+
+# format3 = "{0:f},{1:^10.2f},{2:010.3f},{3:>10.4f}"
+# str21 = format3.format(1.111,2.222,3.333,4.44)
+# print(str21)
+
+local1 = "qyt"
+local2 = "123"
+local3 = "cisco"
+str22 = f'{local1} {local2} {local3}'
+print(str22)
+
