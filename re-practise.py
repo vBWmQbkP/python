@@ -34,11 +34,48 @@ import re
 # result4 = re.findall(pattern4, "fox")
 # print(result4)
 
-str5 = re.match(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\s+1.1.1","192.168.1.1 1.1.1").group(0)
-print(str5)
-
+# str5 = re.match(r"(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+(1.1.1)","192.168.1.1 1.1.1")
+# # print(str5)
+#
 # if str5:
-# 	match = str5.group()
+# 	match = str5.groups()
 # 	print(match)
 # else:
 #     print("没有找到匹配项")
+
+ip = "10.10.10.1/24"
+
+ipv4_addr_pro = r'(?:(?:25[0-5]|2[0-4][0-9]|[01]?\d{1,2})\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?\d{1,2})'
+
+pre_exec_str = re.compile(
+	rf"(?P<ip_address>unassigned|{ipv4_addr_pro})"
+)
+
+match = pre_exec_str.match(ip)
+
+if match:
+	ip_address = match.groups()
+	print(ip_address[0])
+else:
+	print("no match")
+
+#====================================================================================
+
+# ip = "10.10.10.1/24"
+#
+# # IPv4 正则（已使用非捕获组）
+# ipv4_addr_pro = r'(?:(?:25[0-5]|2[0-4][0-9]|[01]?\d{1,2})\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?\d{1,2})'
+#
+# # 组合正则时，IPv4 部分不再额外包裹捕获组
+# pre_exec_str = re.compile(
+#     rf"(?P<ip_address>unassigned|{ipv4_addr_pro})"
+# )
+#
+# match = pre_exec_str.match(ip)
+#
+# if match:
+#     # 直接通过命名分组获取结果
+#     ip_address = match.group("ip_address")
+#     print(ip_address)  # 输出：10.10.10.1/24
+# else:
+#     print("no match")

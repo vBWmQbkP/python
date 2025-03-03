@@ -1,16 +1,68 @@
+# import re
+#
+# showconn = 'TCP server 172.16.1.101:443 localserver 172.16.66.1:53710, idle 0:01:09, bytes 27575949, flags UIO'
+
+# result = re.match(r'([A-Z]{1,3})\s+[a-z]+\s+(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,5})\s+[a-z]+\s+(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,5}),\s+[a-z]+\s+(\d{1,2}):(\d{1,2}):(\d{1,2}),\s+[a-z]+\s+(\d+),\s+[a-z]+\s+(\w+)',showconn).groups()
+#
+# print(f'{"protocol":20}: {result[0]}')
+# print(f'{"server":20}: {result[1]}')
+# print(f'{"localserver":20}: {result[2]}')
+# print(f'{"idle":20}: {result[3]} 小时 {result[4]} 分钟 {result[5]} 秒')
+# print(f'{"bytes":20}: {result[6]}')
+# print(f'{"flags":20}: {result[7]}')
+
 import re
 
 showconn = 'TCP server 172.16.1.101:443 localserver 172.16.66.1:53710, idle 0:01:09, bytes 27575949, flags UIO'
 
-result = re.match(r'([A-Z]{1,3})\s+[a-z]+\s+(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,5})\s+[a-z]+\s+(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,5}),\s+[a-z]+\s+(\d{1,2}):(\d{1,2}):(\d{1,2}),\s+[a-z]+\s+(\d+),\s+[a-z]+\s+(\w+)',showconn).groups()
+ip_port = r"((?:\d{1,3}.){3}\d{1,3}:\d{1,5})"
+time_component = r"((?:\d{1,2}:){2}\d{1,2})"
 
-print(f'{"protocol":20}: {result[0]}')
-print(f'{"server":20}: {result[1]}')
-print(f'{"localserver":20}: {result[2]}')
-print(f'{"idle":20}: {result[3]} 小时 {result[4]} 分钟 {result[5]} 秒')
-print(f'{"bytes":20}: {result[6]}')
-print(f'{"flags":20}: {result[7]}')
+pattern = re.compile(
+    r"(?P<protocol>[A-Z]{1,3})\s+server\s+"
+    rf"(?P<server>{ip_port})\s+localserver\s+"
+    rf"(?P<localserver>{ip_port}),\s+idle\s+"
+    rf"(?P<idle>{time_component}),\s+bytes\s+"
+    r"(?P<bytes>\d+),\s+flags\s+"
+    r"(?P<flags>\w+)"
+)
 
+match = pattern.search(showconn)
+
+# if match:
+#     result = match.groupdict()
+#
+#     hours, minutes, seconds = result['idle'].split(':')
+#
+#     filed = [
+#         ("protocol", result["protocol"]),
+#         ("server", result["server"]),
+#         ("localserver", result["localserver"]),
+#         ("idle", f"{hours} 小时 {minutes} 分钟 {seconds} 秒"),
+#         ("bytes", result["bytes"]),
+#         ("flags", result["flags"]),
+#     ]
+#
+#     for title , value in filed:
+#         print(f'{title:20}: {value}')
+# else:
+#     print("No match")
+
+if match:
+    protocol = match.group('protocol')
+    server = match.group('server')
+    localserver = match.group('localserver')
+    hours, minutes, seconds = match.group('idle').split(':')
+    bytes = match.group('bytes')
+    flags = match.group('flags')
+    print(f'{"protocol":20}: {protocol}')
+    print(f'{"server":20}: {server}')
+    print(f'{"localserver":20}: {localserver}')
+    print(f'{"idle":20}: {hours} 小时 {minutes} 分钟 {seconds}')
+    print(f'{"bytes":20}: {bytes}')
+    print(f'{"flags":20}: {flags}')
+else:
+    print("No match")
 #===============================================================================================================
 # #deepseek-1
 # import re

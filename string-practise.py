@@ -20,8 +20,8 @@
 # myjob = "hacker"
 # for c in myjob:
 #     print(c,end=" ")
-
-str = "hello world"
+#
+# str = "hello world"
 # print(str[0])
 # print(str[-1])
 
@@ -132,9 +132,8 @@ str = "hello world"
 # str21 = format3.format(1.111,2.222,3.333,4.44)
 # print(str21)
 
-local1 = "qyt"
-local2 = "123"
-local3 = "cisco"
-str22 = f'{local1} {local2} {local3}'
-print(str22)
-
+# local1 = "qyt"
+# local2 = "123"
+# local3 = "cisco"
+# str22 = f'{local1} {local2} {local3}'
+# print(str22)
