@@ -1,7 +1,7 @@
 #way1
-word = "scallywag"
-sub_word = word[2:6]
-print(sub_word)
+# word = "scallywag"
+# sub_word = word[2:6]
+# print(sub_word)
 
 # #way2-kimi
 # word = "scallywag"
@@ -15,8 +15,10 @@ print(sub_word)
 # word = "scallywag"; sub_word = word[2:6]; print(sub_word)
 #
 # #way4-deepseek
-# (word := "scallywag", sub_word := word[2:6], print(sub_word))[-1]
+# (word1 := "scallywag", sub_word1 := word1[2:6], print(sub_word1))[-1]
+str1 = (word3 := "scallywag", sub_word3 := word3[2:6], print(sub_word3))[1]
+print(str1)
 #
 # #way5
-# word = "scallywag"
-# print(sub_word:=word[2:6])
+# word2 = "scallywag"
+# print(sub_word2:=word2[2:6])

@@ -1,14 +1,14 @@
-# import os
-# import re
-# route_n_result = os.popen("route -n").read()
-#
-# gateway_result = re.findall(r'((?:\d{1,3}.){3}\d{1,3})\s+0.0.0.0\s+UG', route_n_result)
-#
-# if gateway_result:
-#     gateway = gateway_result[0]
-#     print(f'网关为:{gateway}')
-# else:
-#     print("no gateway")
+import os
+import re
+route_n_result = os.popen("route -n").read()
+
+gateway_result = re.findall(r'((?:\d{1,3}.){3}\d{1,3})\s+0.0.0.0\s+UG', route_n_result)
+
+if gateway_result:
+    gateway = gateway_result[0]
+    print(f'网关为:{gateway}')
+else:
+    print("no gateway")
 
 #===kimi=====================================================================================
 # import subprocess
@@ -45,25 +45,25 @@
 #     print("no gateway")
 
 #===deepseek===============================================================================
-import re
-import subprocess
-
-def get_gateway():
-    try:
-        # 执行route -n命令并捕获输出
-        output = subprocess.check_output(['route', '-n'], text=True, stderr=subprocess.STDOUT)
-    except (subprocess.CalledProcessError, FileNotFoundError):
-        return None
-
-    # 使用正则表达式匹配默认网关行
-    gateway_pattern = re.compile(
-        r'^0\.0\.0\.0\s+(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+0\.0\.0\.0\s+.*[UG].*',
-        re.MULTILINE
-    )
-    matches = gateway_pattern.findall(output)
-
-    return matches[0] if matches else None
-
-if __name__ == '__main__':
-    gateway = get_gateway()
-    print(f'网关为:{gateway}' if gateway else 'no gateway')
+# import re
+# import subprocess
+#
+# def get_gateway():
+#     try:
+#         # 执行route -n命令并捕获输出
+#         output = subprocess.check_output(['route', '-n'], text=True, stderr=subprocess.STDOUT)
+#     except (subprocess.CalledProcessError, FileNotFoundError):
+#         return None
+#
+#     # 使用正则表达式匹配默认网关行
+#     gateway_pattern = re.compile(
+#         r'^0\.0\.0\.0\s+(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+0\.0\.0\.0\s+.*[UG].*',
+#         re.MULTILINE
+#     )
+#     matches = gateway_pattern.findall(output)
+#
+#     return matches[0] if matches else None
+#
+# if __name__ == '__main__':
+#     gateway = get_gateway()
+#     print(f'网关为:{gateway}' if gateway else 'no gateway')
