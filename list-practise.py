@@ -4,3 +4,4 @@ print(test)
 
 b = (a := 2)
 print(b)
+print("test")
