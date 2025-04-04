@@ -129,7 +129,7 @@ if __name__ == "__main__":
     # 配置参数（网页3建议的配置管理方式）
     CONFIG = {
         "fmc_ip": "172.18.6.137",
-        "username": "apiadmin",
+        "username": "test2",
         "password": "Cisc0123",
         "target_name": "test1_network_lists_and_feeds",
         "file_path": "/tmp/network_list.txt"
