@@ -132,6 +132,7 @@ if __name__ == "__main__":
         "username": "test2",
         "password": "Cisc0123",
         "target_name": "test1_network_lists_and_feeds",
+        # "file_path": "D:\python\\netdevops\\test\\network_list.txt"
         "file_path": "/tmp/network_list.txt"
     }
 
