@@ -1,7 +1,7 @@
 import requests
 
-fmc_ip = "172.18.6.137"  # 替换为实际FMC IP
-username = "apiadmin"  # FMC管理员账号
+fmc_ip = "172.20.5.36"  # 替换为实际FMC IP
+username = "test2"  # FMC管理员账号
 password = "Cisc0123"  # FMC管理员密码
 
 auth_url = f"https://{fmc_ip}/api/fmc_platform/v1/auth/generatetoken"

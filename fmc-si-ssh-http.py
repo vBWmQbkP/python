@@ -81,10 +81,10 @@ if __name__ == "__main__":
     # 配置参数
     config = {
         "http_url": "http://172.18.6.135/network_list.txt",
-        "remote_host": "172.18.6.137",
+        "remote_host": "172.20.5.36",
         "remote_user": "echouser",
-        "remote_pwd": "Cisc0132",
-        "remote_path": "/var/sf/iprep_download/1628c08c-115d-11f0-abb4-91b175edea33"
+        "remote_pwd": "Cisc0123",
+        "remote_path": "/var/sf/iprep_download/97e0626c-1476-11f0-ac75-a7c9ac948425"
     }
 
     # 执行写入操作
