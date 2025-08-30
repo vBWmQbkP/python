@@ -9,18 +9,18 @@
 # print(f'{"Type":10}: {result[2]}')
 # print(f'{"Interface":10}: {result[3]}')
 
-#way2-test
-import re
-input_str = '166 54a2.74f7.0326 DYNAMIC Gi1/0/11'
+# #way2-test
+# import re
+# input_str = '166 54a2.74f7.0326 DYNAMIC Gi1/0/11'
 
-pattern = re.compile(
-    r"(?P<vlanid>\d{1,4})\s+"
-    r"(?P<mac>(?:\w{4}\.){2}\w{4})\s+"
-    r"(?P<type>[A-Za-z]+)\s+"
-    r"(?P<interface>[A-Z][a-z](?:\d{1,2}/){2}\d{1,2})"
-)
+# pattern = re.compile(
+#     r"(?P<vlanid>\d{1,4})\s+"
+#     r"(?P<mac>(?:\w{4}\.){2}\w{4})\s+"
+#     r"(?P<type>[A-Za-z]+)\s+"
+#     r"(?P<interface>[A-Z][a-z](?:\d{1,2}/){2}\d{1,2})"
+# )
 
-match = pattern.match(input_str)
+# match = pattern.match(input_str)
 
 # if match:
 #     result = match.groupdict()
@@ -37,16 +37,16 @@ match = pattern.match(input_str)
 # else:
 #     print("No match")
 
-if match:
-    vlanid = match.group('vlanid')
-    mac = match.group('mac')
-    type = match.group('type')
-    interface = match.group('interface')
-    print(f'{"VLAN ID":10}: {vlanid}\n{"MAC":10}: {mac}\n{"Type":10}: {type}\n{"Interface":10}: {interface}')
-else:
-    print('No match')
+# if match:
+#     vlanid = match.group('vlanid')
+#     mac = match.group('mac')
+#     type = match.group('type')
+#     interface = match.group('interface')
+#     print(f'{"VLAN ID":10}: {vlanid}\n{"MAC":10}: {mac}\n{"Type":10}: {type}\n{"Interface":10}: {interface}')
+# else:
+#     print('No match')
 
-#deepseek
+# #deepseek
 # import re
 #
 # input_str = '166 54a2.74f7.0326 DYNAMIC Gi1/0/11'
@@ -74,3 +74,36 @@ else:
 #
 #     for title, key in fields:
 #         print(f'{title:10}: {result[key]}')
+
+import re
+
+str1 = '166 54a2.74f7.0326 DYNAMIC Gi1/0/11'
+
+pattern = re.compile(r"""
+    (?P<vlan_id>\d{1,4})                               # VLAN ID
+    \s+
+    (?P<mac_address>(?:[0-9a-fA-F]{4}\.){2}[0-9a-fA-F]{4})  # MAC 地址
+    \s+
+    (?P<type>DYNAMIC)                                  # 类型
+    \s+
+    (?P<interface>\w+(?:\d{1,2}\/){2}\d{1,2})                        # 接口
+""", re.VERBOSE)
+
+match = pattern.search(str1.strip())
+
+if match:
+    result = match.groupdict()
+    # print(f'{"VLAN ID":10}: {result["vlan_id"]}')
+    # print(f'{"MAC":10}: {result["mac_address"]}')
+    # print(f'{"Type":10}: {result["type"]}')
+    # print(f'{"Interface":10}: {result["interface"]}')
+    fields = [
+        ("VLAN_ID", "vlan_id"),
+        ("MAC", "mac_address"),
+        ("Type", "type"),
+        ("Interface", "interface"),
+    ]
+    for title, key in fields:
+        print(f"{title:10}: {result[key]}")
+else:
+    print("No match")

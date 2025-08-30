@@ -533,3 +533,35 @@
 # #使用join函数将列表的值连成字符串 使用“.”连接
 # a = ".".join(ip_parts)
 # print(a)
+
+# 序列解包案例一
+_, minute, second = "0:01:09".split(":")
+print(minute)  # 01
+# 使用下划线_ Python中约定为 临时变量/被忽略的值
+# 在交互模式中, _ 有特殊用途 会自动保存上一次的计算结果, 因此交互模式下不建议用来丢弃变量
+# 在脚本中, 常用于忽略值
+
+# 序列解包 多个值忽略
+first, *_, last = [1, 2, 3, 4, 5]
+print(first)  # 1
+print(last)   # 5
+# 中间的 2,3,4 被忽略
+
+# 序列解包 只提取指定位置的值
+*_, third = ["a","b","c"]
+print(third)
+
+# 掐头去尾巴
+_, *middle, _ = [10, 20, 30, 40, 50]
+print(middle)  # [20, 30, 40]
+
+# *_用于 收集多余的元素 其实*任何变量名都可以 最后会放到变量列表中
+
+first, *rest = [1, 2, 3, 4]
+print(first)  # 1
+print(rest)   # [2, 3, 4]  ← 是一个列表
+
+# 实际案例 解析路径
+path = "/home/user/documents/report.txt"
+*_, filename = path.split("/")
+print(filename)
