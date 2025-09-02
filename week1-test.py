@@ -534,34 +534,82 @@
 # a = ".".join(ip_parts)
 # print(a)
 
-# 序列解包案例一
-_, minute, second = "0:01:09".split(":")
-print(minute)  # 01
-# 使用下划线_ Python中约定为 临时变量/被忽略的值
-# 在交互模式中, _ 有特殊用途 会自动保存上一次的计算结果, 因此交互模式下不建议用来丢弃变量
-# 在脚本中, 常用于忽略值
+# # 序列解包案例一
+# _, minute, second = "0:01:09".split(":")
+# print(minute)  # 01
+# # 使用下划线_ Python中约定为 临时变量/被忽略的值
+# # 在交互模式中, _ 有特殊用途 会自动保存上一次的计算结果, 因此交互模式下不建议用来丢弃变量
+# # 在脚本中, 常用于忽略值
 
-# 序列解包 多个值忽略
-first, *_, last = [1, 2, 3, 4, 5]
-print(first)  # 1
-print(last)   # 5
-# 中间的 2,3,4 被忽略
+# # 序列解包 多个值忽略
+# first, *_, last = [1, 2, 3, 4, 5]
+# print(first)  # 1
+# print(last)   # 5
+# # 中间的 2,3,4 被忽略
 
-# 序列解包 只提取指定位置的值
-*_, third = ["a","b","c"]
-print(third)
+# # 序列解包 只提取指定位置的值
+# *_, third = ["a","b","c"]
+# print(third)
 
-# 掐头去尾巴
-_, *middle, _ = [10, 20, 30, 40, 50]
-print(middle)  # [20, 30, 40]
+# # 掐头去尾巴
+# _, *middle, _ = [10, 20, 30, 40, 50]
+# print(middle)  # [20, 30, 40]
 
-# *_用于 收集多余的元素 其实*任何变量名都可以 最后会放到变量列表中
+# # *_用于 收集多余的元素 其实*任何变量名都可以 最后会放到变量列表中
 
-first, *rest = [1, 2, 3, 4]
-print(first)  # 1
-print(rest)   # [2, 3, 4]  ← 是一个列表
+# first, *rest = [1, 2, 3, 4]
+# print(first)  # 1
+# print(rest)   # [2, 3, 4]  ← 是一个列表
 
-# 实际案例 解析路径
-path = "/home/user/documents/report.txt"
-*_, filename = path.split("/")
-print(filename)
+# # 实际案例 解析路径
+# path = "/home/user/documents/report.txt"
+# *_, filename = path.split("/")
+# print(filename)
+
+# x = "hello"
+# print(x[::-1])
+
+# # sequence[start:stop:step]
+# # start 起始索引
+# # 第一个冒号前面没有内容 当start部分被省略
+# # 若step是正数 默认从序列的开头（索引0）开始
+# # 若step是负数 默认从序列的末尾（索引-1）开始
+
+# # stop 结束索引
+# # 第二个冒号前面没有内容 当stop部分被省略
+# # 若step是正数 默认从序列的末尾（索引-1）结束
+# # 若step是负数 默认从序列的开头（索引0）结束
+
+# # step 步长
+# # step = 1 从start开始, 以步长1向后（正向）遍历 直到stop
+# # step = 2 从start开始, 以步长2向后（正向）遍历 跳过中间元素 直到stop
+# # step = -1 从start开始, 以步长1向前（反向）遍历 直到stop
+# # step = -2 从start开始, 以步长2向前（反向）遍历 跳过中间元素 直到stop
+
+# ==============
+# from ipaddress import ip_network
+
+# # 已知网络地址和子网掩码
+# net = ip_network("192.168.1.128/25")
+# gateway = list(net.hosts())[0]  # 通常是 .1
+# print(gateway)  # 192.168.1.1
+
+# try:
+#     number = int("abc")  # 这里会出错
+# except ValueError as e:
+#     print(f"出错了：{e}") # e 是 Python 自动生成的 ValueError 异常对象，它包含错误信息
+
+# 标准库
+from ipaddress import ip_interface
+
+# 输入一个 IP 地址 + 子网掩码
+ip_with_mask = "192.168.1.100/24"  # 或 "192.168.1.100/255.255.255.0"
+ip = ip_interface(ip_with_mask)
+
+print(ip)
+print(f"IP 地址: {ip.ip}")
+print(f"子网掩码: {ip.netmask}")
+print(f"网络地址: {ip.network.network_address}")
+print(f"广播地址: {ip.network.broadcast_address}")
+print(f"可用主机范围: {list(ip.network.hosts())[0]} ~ {list(ip.network.hosts())[-1]}")
+print(f"总主机数: {ip.network.num_addresses - 2} (除去网络地址和广播地址)")
